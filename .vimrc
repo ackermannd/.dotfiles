@@ -217,9 +217,16 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
-" Set relative line numbers
-set relativenumber " Use relative line numbers. Current line is still in status bar.
-au BufReadPost,BufNewFile * set relativenumber
+" Set absolute line numbers + relative line toggle
+set number " Use relative line numbers. Current line is still in status bar.
+au BufReadPost,BufNewFile * set number
+function! NumberToggle()
+  if(&number == 1)
+    set relativenumber
+  else
+    set number
+  endif
+endfunc
 
 " Emulate bundles, allow plugins to live independantly. Easier to manage.
 call pathogen#runtime_append_all_bundles()
